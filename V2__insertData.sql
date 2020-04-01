@@ -1,0 +1,1 @@
+insert into vouchertable(vouchernumber,vouchertype, voucheramount,requestedquantity) values (50001,'corporate', '200000', '5000');

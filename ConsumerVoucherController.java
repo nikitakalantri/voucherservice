@@ -24,12 +24,13 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
+@RequestMapping("/api/")
 public class ConsumerVoucherController {
 
 	@Autowired
 	private ConsumerVoucherService consumerVoucherService;
 
-	@ApiOperation(value = "Fetch voucher for consumer")
+	@ApiOperation(value = "Fetch voucher and associate it with consumers")
 	@RequestMapping(value = "/fetchVouchersForConsumer", method = RequestMethod.POST)
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Sucess"),
 			@ApiResponse(code = 204, message = "Empty Contents"),
@@ -44,12 +45,18 @@ public class ConsumerVoucherController {
 		ResponseEntity<List<VoucherModel>> voucherDetails = restTemplate.exchange(baseUrl, HttpMethod.GET, entity,
 				new ParameterizedTypeReference<List<VoucherModel>>() {
 				});
-		List<VoucherModel> res = voucherDetails.getBody();
-		for (VoucherModel voucherModel : res) {
-			voucherModel.getVoucherNumber();
-		}
 		ResponseModel responseModel = consumerVoucherService.fetchFinalRes(voucherDetails);
 		return responseModel;
+	}
+	
+	@ApiOperation(value = "Fetch consumer and its associated vouchers")
+	@RequestMapping(value = "/fetchConsumersVouchers", method = RequestMethod.GET)
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Sucess"),
+			@ApiResponse(code = 204, message = "Empty Contents"),
+			@ApiResponse(code = 400, message = "Invalid request data"),
+			@ApiResponse(code = 500, message = "Unknown error") })
+	public java.util.List<ResponseModel> fetchConsumer() {
+		return this.consumerVoucherService.findAll();
 	}
 
 }

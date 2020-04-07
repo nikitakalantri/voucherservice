@@ -46,4 +46,9 @@ public class ConsumerVoucherServiceImpl implements ConsumerVoucherService{
 		return responseModel;
 	}
 
+	@Override
+	public List<ResponseModel> findAll() {
+		return this.consumerVoucherRepository.findAll();
+	}
+
 }

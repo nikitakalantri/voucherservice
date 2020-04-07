@@ -1,0 +1,224 @@
+swagger: '2.0'
+info:
+  description: API Documentation using swagger
+  version: v2
+  title: Consumer Service
+  termsOfService: 'http://google.com'
+host: 'localhost:9000'
+basePath: /
+tags:
+  - name: consumer-voucher-controller
+    description: Consumer Voucher Controller
+  - name: consumer-controller
+    description: Consumer Controller
+paths:
+  /api/fetchConsumersVouchers:
+    get:
+      tags:
+        - consumer-voucher-controller
+      summary: Fetch consumer and its associated vouchers
+      operationId: fetchConsumerUsingGET_1
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: Sucess
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ResponseModel'
+        '204':
+          description: Empty Contents
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ResponseModel'
+        '400':
+          description: Invalid request data
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Unknown error
+  /api/fetchVouchersForConsumer:
+    post:
+      tags:
+        - consumer-voucher-controller
+      summary: Fetch voucher and associate it with consumers
+      operationId: fetchVouchersForConsumerUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: Sucess
+          schema:
+            $ref: '#/definitions/ResponseModel'
+        '201':
+          description: Created
+        '204':
+          description: Empty Contents
+          schema:
+            $ref: '#/definitions/ResponseModel'
+        '400':
+          description: Invalid request data
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Unknown error
+  /api/v1/createConsumer:
+    post:
+      tags:
+        - consumer-controller
+      summary: Create consumer
+      operationId: createConsumerUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: consumer
+          description: consumer
+          required: true
+          schema:
+            $ref: '#/definitions/ConsumerModel'
+      responses:
+        '200':
+          description: Sucess
+          schema:
+            $ref: '#/definitions/ConsumerModel'
+        '201':
+          description: Created
+        '204':
+          description: Empty Contents
+          schema:
+            $ref: '#/definitions/ConsumerModel'
+        '400':
+          description: Invalid request data
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Unknown error
+  /api/v1/fetchConsumer:
+    get:
+      tags:
+        - consumer-controller
+      summary: Fetch consumer
+      operationId: fetchConsumerUsingGET
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: Sucess
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ConsumerModel'
+        '204':
+          description: Empty Contents
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ConsumerModel'
+        '400':
+          description: Invalid request data
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Unknown error
+  '/api/v1/fetchConsumer/{consumerId}':
+    get:
+      tags:
+        - consumer-controller
+      summary: Fetch consumer by id
+      operationId: fetchVoucherByIdUsingGET
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: consumerId
+          in: path
+          description: consumerId
+          required: true
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Optional«ConsumerModel»'
+        '204':
+          description: Empty Contents
+          schema:
+            $ref: '#/definitions/Optional«ConsumerModel»'
+        '400':
+          description: Invalid request data
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Unknown error
+definitions:
+  Optional«ConsumerModel»:
+    type: object
+    properties:
+      present:
+        type: boolean
+  ResponseModel:
+    type: object
+    properties:
+      consumerEmail:
+        type: string
+      consumerId:
+        type: integer
+        format: int32
+      consumerName:
+        type: string
+      requestedQuantity:
+        type: string
+      voucherAmount:
+        type: string
+      voucherId:
+        type: string
+      voucherNumber:
+        type: integer
+        format: int32
+      voucherType:
+        type: string
+  ConsumerModel:
+    type: object
+    properties:
+      consumerEmail:
+        type: string
+      consumerId:
+        type: integer
+        format: int32
+      consumerName:
+        type: string
+      voucherId:
+        type: string

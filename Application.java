@@ -1,4 +1,4 @@
-package com.voucher.consumer.service;
+package com.jpapostgre.gradle.jpa.postgre;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

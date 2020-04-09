@@ -1,4 +1,4 @@
-package com.voucher.demo.voucherService.model;
+package com.jpapostgre.gradle.jpa.postgre.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +9,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "vouchertable")
 public class VoucherModel {
+
 	@Id
 	@GeneratedValue
 	private int voucherNumber;
@@ -25,6 +26,14 @@ public class VoucherModel {
 
 	public VoucherModel(String voucherType, String voucherAmount, String requestedQuantity) {
 		super();
+		this.voucherType = voucherType;
+		this.voucherAmount = voucherAmount;
+		this.requestedQuantity = requestedQuantity;
+	}
+	
+	public VoucherModel(int voucherNumber, String voucherType, String voucherAmount, String requestedQuantity) {
+		super();
+		this.voucherNumber = voucherNumber;
 		this.voucherType = voucherType;
 		this.voucherAmount = voucherAmount;
 		this.requestedQuantity = requestedQuantity;
@@ -67,7 +76,5 @@ public class VoucherModel {
 		return "VoucherModel [voucherNumber=" + voucherNumber + ", voucherType=" + voucherType + ", voucherAmount="
 				+ voucherAmount + ", requestedQuantity=" + requestedQuantity + "]";
 	}
-	
-	
 
 }

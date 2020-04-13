@@ -21,6 +21,7 @@ dependencies {
 	compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.6.1'
 	compile('org.flywaydb:flyway-core')
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+	testImplementation 'org.mockito:mockito-core:2.7.22'
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
 }
